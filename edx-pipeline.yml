@@ -1,0 +1,13 @@
+- name: Deploy all dependencies of edx-analytics-pipeline to the node
+  hosts: pipeline
+  become: True
+  gather_facts: True
+
+  vars:
+    ANALYTICS_PIPELINE_INPUT_DATABASE_HOST: "{{ groups['datastores'][0] }}"
+    ANALYTICS_PIPELINE_OUTPUT_DATABASE_HOST: "{{ groups['datastores'][0] }}"
+    HIVE_METASTORE_DATABASE_HOST: "{{ groups['datastores'][0] }}"
+
+  roles:
+    - analytics_pipeline
+
